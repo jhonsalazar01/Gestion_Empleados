@@ -1,4 +1,6 @@
 require('dotenv').config();
+const cors = require('cors');
+
 
 const express = require('express');
 const expressLayout = require('express-ejs-layouts');
@@ -23,6 +25,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride('_method'));
 // Ejemplo de configuración en un servidor Node.js con Express
+app.use(cors({
+  origin: '*', // Permite cualquier origen
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 
 
