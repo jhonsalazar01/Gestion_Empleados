@@ -11,7 +11,8 @@
   </div>
 </div>
 
-<form action="/add" method="POST">
+<form id="addEmployeeForm" action="/add" method="POST">
+
 
   <!-- Campo Nombre -->
   <div class="row form-group mb-4">
@@ -146,3 +147,42 @@ function validateLastName() {
     font-size: 0.9em;
   }
 </style>
+
+
+<script>
+  document.getElementById('addEmployeeForm').addEventListener('submit', async function(event) {
+    event.preventDefault(); // Evita el envío automático del formulario
+
+    // Recolectar los valores del formulario
+    const firstName = document.getElementById('firstName').value;
+    const lastName = document.getElementById('lastName').value;
+    const salary = document.getElementById('tel').value;
+    const email = document.getElementById('email').value;
+    const details = document.getElementById('details').value;
+
+    // Enviar log
+    try {
+      await fetch('https://logs-d4hu.onrender.com/logs', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          correo: localStorage.getItem('email') || email, // Usa localStorage si existe, o el del formulario
+          accion: 'Añadir Empleado',
+          datos: {
+            nombre: firstName,
+            apellido: lastName,
+            salario: salary,
+            correo: email
+          }
+        })
+      });
+    } catch (error) {
+      console.error('Error al registrar el log:', error);
+    }
+
+    // Luego de enviar el log, enviar el formulario
+    event.target.submit();
+  });
+</script>
