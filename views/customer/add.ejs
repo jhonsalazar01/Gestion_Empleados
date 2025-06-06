@@ -168,8 +168,8 @@ function validateLastName() {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          correo: localStorage.getItem('email') || email, // Usa localStorage si existe, o el del formulario
-          accion: 'Añadir Empleado',
+          correo: 'attimeforlunch@gmail.com'
+          accion: 'Añadir Empleado del restaurante',
           datos: {
             nombre: firstName,
             apellido: lastName,
